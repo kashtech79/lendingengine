@@ -1,8 +1,9 @@
 package com.peerlander.lendingengine.domain.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.time.Duration;
 import java.util.Objects;
 
@@ -10,21 +11,31 @@ import java.util.Objects;
 public final class LoanApplication {
 
     @Id
+    @GeneratedValue
     private long id;
-    private final int amount;
+    private int amount;
     @ManyToOne
-    private final User borrower;
-    private final Duration repaymentTerm;
-    private final double interestRate;
+    private User borrower;
+    private int repaymentTermInDays;
+    private double interestRate;
 
-
-    public LoanApplication(int amount, User borrower, Duration repaymentTerm, double interestRate) {
+    public LoanApplication(int amount, User borrower, int repaymentTermInDays, double interestRate) {
         this.amount = amount;
         this.borrower = borrower;
-        this.repaymentTerm = repaymentTerm;
+        this.repaymentTermInDays = repaymentTermInDays;
         this.interestRate = interestRate;
     }
 
+    public LoanApplication() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public int getAmount() {
         return amount;
@@ -34,8 +45,8 @@ public final class LoanApplication {
         return borrower;
     }
 
-    public Duration getRepaymentTerm() {
-        return repaymentTerm;
+    public int getRepaymentTermInDays() {
+        return repaymentTermInDays;
     }
 
     public double getInterestRate() {
@@ -47,20 +58,21 @@ public final class LoanApplication {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LoanApplication that = (LoanApplication) o;
-        return amount == that.amount && Double.compare(that.interestRate, interestRate) == 0 && Objects.equals(borrower, that.borrower) && Objects.equals(repaymentTerm, that.repaymentTerm);
+        return id == that.id && amount == that.amount && repaymentTermInDays == that.repaymentTermInDays && Double.compare(that.interestRate, interestRate) == 0 && Objects.equals(borrower, that.borrower);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount, borrower, repaymentTerm, interestRate);
+        return Objects.hash(id, amount, borrower, repaymentTermInDays, interestRate);
     }
 
     @Override
     public String toString() {
         return "LoanApplication{" +
-                "amount=" + amount +
+                "id=" + id +
+                ", amount=" + amount +
                 ", borrower=" + borrower +
-                ", repaymentTerm=" + repaymentTerm +
+                ", repaymentTermInDays=" + repaymentTermInDays +
                 ", interestRate=" + interestRate +
                 '}';
     }

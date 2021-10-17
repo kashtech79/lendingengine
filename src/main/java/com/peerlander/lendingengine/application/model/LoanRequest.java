@@ -1,15 +1,15 @@
 package com.peerlander.lendingengine.application.model;
 
+import javax.persistence.Entity;
 import java.time.Duration;
 import java.util.Objects;
 
-
 public class LoanRequest {
 
-    private final int amount;
-    private final long borrowerId;
-    private final int daysToRepay;
-    private final double interestRate;
+    private int amount;
+    private long borrowerId;
+    private int daysToRepay;
+    private double interestRate;
 
 
     public LoanRequest(int amount, long borrowerId, Duration repaymentTerm, int daysToRepay, double interestRate) {
@@ -26,7 +26,6 @@ public class LoanRequest {
     public long getBorrowerId() {
         return borrowerId;
     }
-
 
     public int getDaysToRepay() {
         return daysToRepay;
