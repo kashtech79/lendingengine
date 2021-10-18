@@ -3,6 +3,7 @@ package com.peerlander.lendingengine.domain.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @Entity
@@ -10,7 +11,9 @@ public class Loan {
     @Id
     @GeneratedValue
     private long id;
+    @ManyToOne
     private User borrower;
+    @ManyToOne
     private User lender;
     private int amount;
     private double interestRate;
@@ -18,6 +21,62 @@ public class Loan {
     private LocalDate dateDue;
 
     public Loan() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public User getBorrower() {
+        return borrower;
+    }
+
+    public void setBorrower(User borrower) {
+        this.borrower = borrower;
+    }
+
+    public User getLender() {
+        return lender;
+    }
+
+    public void setLender(User lender) {
+        this.lender = lender;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public double getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(double interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    public LocalDate getDateLent() {
+        return dateLent;
+    }
+
+    public void setDateLent(LocalDate dateLent) {
+        this.dateLent = dateLent;
+    }
+
+    public LocalDate getDateDue() {
+        return dateDue;
+    }
+
+    public void setDateDue(LocalDate dateDue) {
+        this.dateDue = dateDue;
     }
 
     public Loan(User lender, LoanApplication loanApplication) {

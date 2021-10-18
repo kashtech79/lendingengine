@@ -1,6 +1,7 @@
 package com.peerlander.lendingengine.application;
 
 import com.peerlander.lendingengine.application.model.LoanRequest;
+import com.peerlander.lendingengine.domain.model.Loan;
 import com.peerlander.lendingengine.domain.model.LoanApplication;
 import com.peerlander.lendingengine.domain.model.User;
 import com.peerlander.lendingengine.domain.repository.LoanApplicationRepository;
@@ -47,8 +48,13 @@ public class LoanController {
     }
 
     @PostMapping(value = "/loan/accept/{lenderId}/{loanApplicationId}")
-    public void acceptLoan(@PathVariable String lenderId,
-                           @PathVariable String loanApplicationId){
+    public void acceptLoan(@PathVariable final String lenderId,
+                           @PathVariable final String loanApplicationId){
         loanService.acception(Long.parseLong(loanApplicationId), Long.parseLong(lenderId));
+    }
+
+    @GetMapping("/loans")
+    public List<Loan> getLoans(){
+        return loanService.getLoans();
     }
 }
